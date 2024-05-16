@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Sheet of May-2024</title>
+
+    <link rel="stylesheet" href="./data table/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./data table/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.8.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="./img/logo.jpg">
+</head>
+
+<body>
+
+    <div class="container my-3">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <select id="month-select" class="form-select">
+                    <option value="2024-01">January 2024</option>
+                    <option value="2024-02">February 2024</option>
+                    <option value="2024-03">March 2024</option>
+                    <option value="2024-04">April 2024</option>
+                    <option value="2024-05"selected>May 2024</option>
+                    <option value="2024-06">June 2024</option>
+                    <option value="2024-07">July 2024</option>
+                    <option value="2024-08">August 2024</option>
+                    <option value="2024-09">September 2024</option>
+                    <option value="2024-10">October 2024</option>
+                    <option value="2024-11">November 2024</option>
+                    <option value="2024-12">December 2024</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button id="update-month" class="btn btn-primary">Update Month</button>
+            </div>
+            <div class="col-md-2">
+                <button id="download-pdf" class="btn btn-success">Download PDF</button>
+            </div>
+        </div>
+        <div class="border-warning-subtle grid grid-flow-row-dense rounded-3xl">
+            <div class="row">
+                <div class="col">
+                    <div class="data_table">
+                        <table id="example" class="table-hover table">
+                            <thead class="table-dark">
+                                <!-- Headers will be dynamically generated -->
+                            </thead>
+                            <tbody>
+                                <!-- Data will be dynamically generated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./data table/js/bootsrap.bundle.min.js"></script>
+    <script src="./data table/js/jquery-3.6.0.min.js"></script>
+    <script src="./data table/js/datatables.min.js"></script>
+    <script src="./data table/js/pdfmake.min.js"></script>
+    <script src="./data table/js/vfs_fonts.js"></script>
+    <script src="./data table/js/custom.js"></script>
+    <script src="./index.js"></script>
+    <script src="./script.js"></script>
+
+    <script>
+        // Function to get the number of days in a month
+        function getDaysInMonth(year, month) {
+            return new Date(year, month, 0).getDate();
+        }
+
+        // Function to get the name of the day
+        function getDayName(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { weekday: 'short' });
+        }
+
+        // Function to update the table based on the selected month
+        function updateTable(year, month) {
+            const daysInMonth = getDaysInMonth(year, month);
+            const startDate = new Date(year, month - 1, 1);
+
+            // Create header rows
+            let headerHTML = `
+                <tr class="text-capitalize">
+                    <th colspan="4" class="text-center text-bg-Info fw-bolder text-lg"></th>
+                    <th colspan="${daysInMonth}" class="text-center text-bg-Info fw-bolder text-lg"><h5>${new Date(year, month - 1).toLocaleString('default', { month: 'long' })} ${year}</h5></th>
+                </tr>
+                <tr class="text-capitalize">
+                    <th class="text-bg-Info fw-bolder col-auto text-center text-lg"><h5>S.N</h5></th>
+                    <th class="text-bg-Info fw-bolder text-center col-auto text-lg"><h5>Employee ID No.</h5></th>
+                    <th class="text-bg-success fw-bolder text-center col-4 text-lg"><h5>Employees Name</h5></th>
+                    <th class="text-bg-Info fw-bolder text-center col-4 text-lg"><h5>Job Title</h5></th>
+                    ${Array.from({ length: daysInMonth }, (_, i) => {
+                        const day = i + 1;
+                        const dateStr = `${year}-${month}-${day}`;
+                        return `<th class="text-bg-Info fw-bolder text-center text-lg"><h5>${getDayName(dateStr)}, ${day}</h5></th>`;
+                    }).join('')}
+                    <th class="text-bg-Info fw-bolder text-center text-lg"><h5>Total</h5></th>
+                </tr>
+            `;
+
+            // Employees data here
+            const employees = [
+                { id: '1111825723', name: 'Abdulhakim Alammar', jobTitle: 'Manager' },
+                { id: '1111825724', name: 'John Doe', jobTitle: 'Developer' },
+                { id: '1111825725', name: 'Jane Smith', jobTitle: 'Designer' },
+                { id: '1111825726', name: 'Ali Ahmed', jobTitle: 'Tester' },
+                { id: '1111825727', name: 'Maria Garcia', jobTitle: 'HR' },
+                // Add more employees as needed
+            ];
+
+            // Create body rows
+            let bodyHTML = employees.map((employee, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${employee.id}</td>
+                    <td>${employee.name}</td>
+                    <td>${employee.jobTitle}</td>
+                    ${Array.from({ length: daysInMonth }, (_, i) => {
+                        const day = i + 1;
+                        const dateStr = `${year}-${month}-${day}`;
+                        const dayName = getDayName(dateStr);
+                        if (dayName === 'Fri') {
+                            return '<td contenteditable="true" style="background-color: yellow;">H</td>';
+                        } else {
+                            return '<td contenteditable="true">P</td>';
+                        }
+                    }).join('')}
+                    <td contenteditable="true" class="total-cell"></td>
+                </tr>
+            `).join('');
+
+            // Update table headers and body
+            $('#example thead').html(headerHTML);
+            $('#example tbody').html(bodyHTML);
+
+            // Recalculate totals initially
+            calculateTotals();
+        }
+
+        // Function to calculate total P and total H
+        function calculateTotals() {
+            $('#example tbody tr').each(function () {
+                var totalP = 0;
+                var totalH = 0;
+
+                // Iterate through each cell in the row
+                $(this).find('td').each(function (index) {
+                    // Skip first four columns (S.N, Employee ID No., Employees Name, Job Title)
+                    if (index > 3) {
+                        var value = $(this).text().trim();
+                        // Increment totalP if the cell contains 'P'
+                        if (value === 'P') {
+                            totalP++;
+                        }
+                        // Increment totalH if the cell contains 'H'
+                        else if (value === 'H') {
+                            totalH++;
+                        }
+                    }
+                });
+
+                // Update the total cell with the calculated values
+                $(this).find('.total-cell').text(`P: ${totalP}, H: ${totalH}`);
+            });
+        }
+
+        // Function to generate and download PDF
+        function downloadPDF() {
+            const [year, month] = $('#month-select').val().split('-');
+            const daysInMonth = getDaysInMonth(year, month);
+            const selectedMonthName = $('#month-select option:selected').text(); // Get the selected month name
+
+            var docDefinition = {
+                content: [
+                    {
+                        text: `Attendance Sheet for ${selectedMonthName}`, // Use the selected month name
+                        style: 'header',
+                        color: 'blue'  // Set header text color
+                    },
+                    {
+                        table: {
+                            headerRows: 2,
+                            body: [
+                                [
+                                    { text: 'S.N', style: 'tableHeader', fillColor: '#D3D3D3' },
+                                    { text: 'Employee ID No.', style: 'tableHeader', fillColor: '#D3D3D3' },
+                                    { text: 'Employees Name', style: 'tableHeader', fillColor: '#D3D3D3' },
+                                    { text: 'Job Title', style: 'tableHeader', fillColor: '#D3D3D3' },
+                                    ...Array.from({ length: daysInMonth }, (_, i) => {
+                                        const day = i + 1;
+                                        const dateStr = `${$('#month-select').val()}-${day}`;
+                                        return { text: `${getDayName(dateStr)}, ${day}`, style: 'tableHeader', fillColor: '#D3D3D3' };
+                                    }),
+                                    { text: 'Total', style: 'tableHeader', fillColor: '#D3D3D3' }
+                                ],
+                                ...$('#example tbody tr').map((index, tr) => {
+                                    var $tr = $(tr);
+                                    var row = [
+                                        { text: $tr.find('td:eq(0)').text(), style: 'tableBody' },
+                                        { text: $tr.find('td:eq(1)').text(), style: 'tableBody' },
+                                        { text: $tr.find('td:eq(2)').text(), style: 'tableBody' },
+                                        { text: $tr.find('td:eq(3)').text(), style: 'tableBody' },
+                                        ...$tr.find('td:gt(3)').map((_, td) => ({ text: $(td).text(), style: 'tableBody' })).get()
+                                    ];
+                                    return row;
+                                }).get()
+                            ]
+                        }
+                    }
+                ],
+                styles: {
+                    header: {
+                        fontSize: 18,
+                        bold: true,
+                        margin: [0, 0, 0, 10]
+                    },
+                    tableHeader: {
+                        bold: true,
+                        fontSize: 13,
+                        color: 'black'
+                    },
+                    tableBody: {
+                        fontSize: 11
+                    }
+                }
+            };
+
+            pdfMake.createPdf(docDefinition).download(`Attendance_Sheet_${selectedMonthName}.pdf`); // Use the selected month name in the file name
+        }
+
+        // Event listener to update the month when the button is clicked
+        $('#update-month').on('click', function () {
+            const [year, month] = $('#month-select').val().split('-');
+            updateTable(year, month);
+        });
+
+        // Event listener to recalculate totals whenever the table is updated
+        $('#example tbody').on('input', 'td', function () {
+            calculateTotals();
+        });
+
+        // Event listener to delete 'P' on double click
+        $('#example tbody').on('dblclick', 'td', function () {
+            if ($(this).text().trim() === 'P') {
+                $(this).text('');
+                calculateTotals();
+            }
+        });
+
+        // Event listener to download PDF
+        $('#download-pdf').on('click', function () {
+            downloadPDF();
+        });
+
+        // Initialize the table with the default selected month
+        const [defaultYear, defaultMonth] = $('#month-select').val().split('-');
+        updateTable(defaultYear, defaultMonth);
+    </script>
+
+</body>
+
+</html>

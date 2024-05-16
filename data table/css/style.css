@@ -1,8 +1,7 @@
 
 .header_part{
-    background:#272626;
     padding: 10px 60px;
-    position: relative;
+    position: cover;
     top: 10px;
     width: 100%;
     text-align: center;
@@ -10,20 +9,19 @@
 }
 .header_part h4{
     color: #373434;
-    padding: 5px;
+    padding: 100px;
     margin-bottom: 2px;
 }
 .header_part img{
-    float: left;
-    height: 60px;
+    float:inline-end;
+    height: 300px;
     border-radius: 50%;
 }
 
 
 .data_table{
-    background: #c0e2b298;
+    background: #cceccc98;
     padding: 20px;
-    margin: bottom 50px;;
     box-shadow: 1px 3px 5px #aaa;
     border-radius: 5px;
 }
@@ -35,5 +33,7 @@
 .text-center {
     text-align: center;
 }
+
+
 
 
