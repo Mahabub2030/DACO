@@ -85,8 +85,7 @@
 
         // Function to update the table based on the selected month
         function updateTable(year, month) {
-            const daysInMonth = getDaysInMonth(year, month);
-            const startDate = new Date(year, month - 1, 1);
+            const daysInMonth = getDaysInMonth(year, month);            const startDate = new Date(year, month - 1, 5);
 
             // Create header rows
             let headerHTML = `
@@ -592,7 +591,7 @@
                     },
                     {
                         table: {
-                            headerRows: 2,
+                            headerRows:1,
                             body: [
                                 [
                                     { text: 'S.N', style: 'tableHeader', fillColor: '#D3D3D3' },

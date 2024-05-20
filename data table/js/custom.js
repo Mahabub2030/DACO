@@ -209,7 +209,7 @@ $(document).ready(function() {
                     // Change page size and orientation to A3
                     doc.pageOrientation = 'landscape';
                     doc.pageSize = 'A3';
-                    doc.defaultStyle.fontSize = 10;
+                    doc.defaultStyle.fontSize = 12;
                     
                     // Apply text-center class to 9th and 10th columns in PDF
                     doc.content[1].table.body.forEach(function(row) {
@@ -218,9 +218,16 @@ $(document).ready(function() {
                     });
 
                     // Increase font size for header
-                    doc.content[1].table.headerRows = 2; // Make sure header is only shown once
-                    doc.styles.tableHeader.fontSize = 10; // Set font size for header
-                    doc.styles.tableHeader.alignment = 'center'
+                    doc.content[1].table.body.forEach(function
+                        (row){
+                            row.forEach(function(cell){
+                                cell.fontSize =10;
+                            })
+                        }
+                    )
+                    // doc.content[1].table.headerRows = 1; // Make sure header is only shown once
+                    // doc.styles.tableHeader.fontSize = 10; // Set font size for header
+                    // doc.styles.tableHeader.alignment = 'center'
                 }
             }, 
             'print', 
@@ -259,27 +266,3 @@ $(document).ready(function() {
     table.buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
 });
 
-
-
-
-
-
-
-function changeMonth() {
-    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    var currentDate = new Date(); // Get the current date
-    var currentMonth = currentDate.getMonth(); // Get the current month index
-    var currentYear = currentDate.getFullYear(); // Get the current year
-
-    // Find the next month index (if December, go back to January)
-    var nextMonthIndex = (currentMonth === 11) ? 0 : currentMonth + 1;
-    var nextMonth = months[nextMonthIndex]; // Get the name of the next month
-
-    // Update the month name in the table
-    var monthHeader = document.querySelector('.text-center.text-bg-Info');
-    monthHeader.innerHTML = "<h5>Week of " + nextMonth + "-" + currentYear + "</h5>";
-
-    // Update the month name in the footer
-    var footer = document.querySelector('footer');
-    footer.innerHTML = "&copy; Copy Writing Mahabub_Alam from - #" + currentYear;
-}
