@@ -221,7 +221,7 @@ $(document).ready(function() {
                     doc.content[1].table.body.forEach(function
                         (row){
                             row.forEach(function(cell){
-                                cell.fontSize =10;
+                                cell.fontSize =8;
                             })
                         }
                     )
