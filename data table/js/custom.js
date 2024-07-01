@@ -334,6 +334,11 @@ $(document).ready(function() {
     });
 
     table.buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+
+
+    // Set the current month in the page title and header
+    $('#currentMonthHeader').text(currentMonth);
+    document.title = "Attendance Sheet  Month of -  " + currentMonth + "2024";
 });
 
 
