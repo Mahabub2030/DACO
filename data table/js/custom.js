@@ -283,7 +283,7 @@ $(document).ready(function() {
                 customize: function (doc) {
                     // Change page size and orientation to A4
                     doc.pageOrientation = 'landscape';
-                    doc.pageSize = 'A4';
+                    doc.pageSize = 'A3';
                     doc.defaultStyle.fontSize = 10;
                     
                     // Apply text-center class to 9th and 10th columns in PDF
