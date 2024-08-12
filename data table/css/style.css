@@ -24,14 +24,18 @@ body{
 
 
 .data_table{
-    /* background: #22222298; */
-    /* padding: 20px; */
-    box-shadow: 1px 3px 5px #aaa;
+    background: #ebe3e398;
+    color: aliceblue;
+    padding: 20px;
+    box-shadow: 0px 5px #cfcece;
     border-radius: 5px;
+    padding: 0;
+    width: 200vh;
+    height: 100%;
 }
 .data_table .btn{
     /* padding: 5px 10px; */
-    margin: 10px 3px 10px 0;
+    margin: 10px 3px 10px 10px;
     border-radius: 10px;
 }
 
