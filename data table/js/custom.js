@@ -70,6 +70,6 @@ $(document).ready(function() {
 
     // Set the current month in the page title and header
     $('#currentMonthHeader').text(currentMonth);
-    document.title = "Attendance Sheet  Month of  -  " + currentMonth ;
+    document.title = "Attendance Sheet  Month of  -"  + currentMonth +          " 2024 ";
 });
 

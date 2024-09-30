@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <!-- <title>Attendance Sheet  Month of - June 2024</title> -->
-    <title>Attendance Sheet  Month of - <span id = "currentMonthHeader"></span></title>
+    <title>Attendance Sheet  Month of - <span id = "currentMonthHeader">    2024</span></title>
     <!-- <title>Attendance Sheet  Month of - August - 2024</title> -->
 
     <link rel="stylesheet" href="./data table/css/bootstrap.min.css">
@@ -88,7 +88,8 @@
 
         // Function to update the table based on the selected month
         function updateTable(year, month) {
-            const daysInMonth = getDaysInMonth(year, month);            const startDate = new Date(year, month - 1, 5);
+            const daysInMonth = getDaysInMonth(year, month);        
+            const startDate = new Date(year, month - 1, 5);
 
             // Create header rows
             let headerHTML = `
@@ -247,7 +248,7 @@
                 { id: '2489688859', name: 'Alex Garcia Garcia', jobTitle: 'Chief Sction Head' },
                 { id: '2491045577', name: 'HRIDOY RAFQUL ISLAM ', jobTitle: 'Gardener' },
                 { id: '2494139062', name: 'Salim Siddiqur Rahman', jobTitle: 'Equp opertor' },
-                { id: '2483674780', name: 'MD ANISUR RHAMAN', jobTitle: 'Mechanic' },
+                { id: '2568282160', name: 'Ayman Elshahat', jobTitle: 'Past_Control Suparvisor' },
                 { id: '2494387042', name: 'MD Suman', jobTitle: 'Labour' },
                 { id: '2495594786', name: 'BACHU MIAH', jobTitle: 'Mason' },
                 // Add more employees as needed 110 done here
