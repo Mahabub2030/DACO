@@ -464,8 +464,6 @@
                 // // Add more employees as needed 260 done here
 
 
-
-
                 // // Add more employees as 261 Start here.
                 { id: '2547865465', name: 'MUAMMAD SALEH', jobTitle: 'Gardener' },
                 { id: '2547865515', name: 'NASIR KHAN', jobTitle: 'Gardener' },
@@ -546,7 +544,6 @@
                 
                 // // Add more employees as needed 313 done here
             ];
-
             // Create body rows
             let bodyHTML = employees.map((employee, index) => `
                 <tr>
@@ -575,7 +572,6 @@
             // Recalculate totals initially
             calculateTotals();
         }
-
         // Function to calculate total P and total H
         function calculateTotals() {
             $('#example tbody tr').each(function () {
@@ -597,12 +593,10 @@
                         }
                     }
                 });
-
                 // Update the total cell with the calculated values
                 $(this).find('.total-cell').text(`P: ${totalP}, H: ${totalH}`);
             });
         }
-
         // Function to generate and download PDF
         function downloadPDF() {
             const [year, month] = $('#month-select').val().split('-');
@@ -666,18 +660,15 @@
 
             pdfMake.createPdf(docDefinition).download(`Attendance_Sheet_${selectedMonthName}.pdf`); // Use the selected month name in the file name
         }
-
         // Event listener to update the month when the button is clicked
         $('#update-month').on('click', function () {
             const [year, month] = $('#month-select').val().split('-');
             updateTable(year, month);
         });
-
         // Event listener to recalculate totals whenever the table is updated
         $('#example tbody').on('input', 'td', function () {
             calculateTotals();
         });
-
         // Event listener to delete 'P' on double click
         $('#example tbody').on('dblclick', 'td', function () {
             if ($(this).text().trim() === 'P') {
@@ -685,18 +676,13 @@
                 calculateTotals();
             }
         });
-
         // Event listener to download PDF
         $('#download-pdf').on('click', function () {
             downloadPDF();
         });
-
         // Initialize the table with the default selected month
         const [defaultYear, defaultMonth] = $('#month-select').val().split('-');
         updateTable(defaultYear, defaultMonth);
-
-
-    
     </script>
 
 </body>
