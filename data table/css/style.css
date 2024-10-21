@@ -1,10 +1,10 @@
-body{
+/* body{
     scroll-behavior: smooth;
 
 }
 
 .header_part{
-    /* padding: 10px 60px; */
+
     position: cover;
     top: 10px;
     width: 100%;
@@ -12,20 +12,20 @@ body{
     z-index: 9999;
 }
 .header_part h4{
-    color: #373434;
-    /* padding: 100px; */
+    color: #131212;
+    
     margin-bottom: 2px;
 }
 .header_part img{
-    /* float:inline-end; */
+
     height: 300px;
     border-radius: 50%;
 }
 
 
 .data_table{
-    background: #ebe3e398;
-    color: aliceblue;
+    background: #f3e8e898;
+    color: #1f1e1e98;
     padding: 20px;
     box-shadow: 0px 5px #cfcece;
     border-radius: 5px;
@@ -34,8 +34,56 @@ body{
     height: 100%;
 }
 .data_table .btn{
-    /* padding: 5px 10px; */
+
     margin: 10px 3px 10px 10px;
+    border-radius: 10px;
+}
+
+.text-center {
+    text-align: center;
+} */
+
+
+
+body {
+    scroll-behavior: smooth;
+    margin: 0; /* Ensure no extra space on the sides */
+    padding: 0;
+}
+
+.header_part {
+    background: #272626;
+    padding: 10px 20px; /* Adjust padding for consistent spacing */
+    position: relative; /* Use relative instead of cover */
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 9999;
+}
+
+.header_part h4 {
+    color: #131212;
+    margin-bottom: 2px;
+}
+
+.header_part img {
+    height: 60px; /* Adjusted for a smaller, centered header image */
+    border-radius: 50%;
+}
+
+.data_table {
+    background: #f3e8e898;
+    color: #1f1e1e98;
+    padding: 20px;
+    box-shadow: 0px 5px 15px #cfcece; /* Better shadow effect */
+    border-radius: 5px;
+    width: 90vw; /* Use percentage or vw instead of vh for responsive design */
+    margin: 0 auto; /* Center the table */
+}
+
+.data_table .btn {
+    padding: 5px 10px;
+    margin: 10px 3px;
     border-radius: 10px;
 }
 
@@ -44,5 +92,17 @@ body{
 }
 
 
+@media (max-width: 768px) {
+    .data_table {
+        width: 95vw; /* Adjust width for smaller screens */
+    }
+    
+    .header_part h4 {
+        font-size: 1.2em; /* Responsive font size */
+    }
 
+    .header_part img {
+        height: 50px; /* Smaller image on small screens */
+    }
+}
 

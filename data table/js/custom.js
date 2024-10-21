@@ -1,10 +1,9 @@
 
-$(document).ready(function() {
+$(document).ready(function() { 
     // Get the current date
     var currentDate = new Date();
     // Get the month and convert it to a string with the full month name
     var currentMonth = currentDate.toLocaleString('en-US', { month: 'long' });
-
     var table = $('#example').DataTable({
         buttons: [
             'copy', 
@@ -17,7 +16,7 @@ $(document).ready(function() {
                     doc.pageOrientation = 'landscape';
                     doc.pageSize = 'A3';
                     doc.defaultStyle.fontSize = 10;
-                    
+            
                     // Apply text-center class to 9th and 10th columns in PDF
                     doc.content[1].table.body.forEach(function(row) {
                         row[8].alignment = 'center'; // 9th column alignment
@@ -37,6 +36,7 @@ $(document).ready(function() {
             'remove'
         ]
     });
+
 
     // Update the title to display the current month
     $('.title').text("Manpower List Month Of " + currentMonth + "-" + currentDate.getFullYear());
